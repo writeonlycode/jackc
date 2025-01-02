@@ -1,0 +1,15 @@
+<tokens>
+<stringConstant> string constant </stringConstant>
+<keyword> class </keyword>
+<Identifier> Main </Identifier>
+<symbol> { </symbol>
+<keyword> var </keyword>
+<Identifier> foo </Identifier>
+<symbol> ; </symbol>
+<keyword> let </keyword>
+<Identifier> foo </Identifier>
+<symbol> = </symbol>
+<integerConstant> 1001 </integerConstant>
+<symbol> ; </symbol>
+<symbol> } </symbol>
+</tokens>
