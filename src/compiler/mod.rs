@@ -53,27 +53,27 @@ impl<'a> Compiler<'a> {
         };
 
         match keyword {
-            Keyword::Class => write!(self.output, "<keyword> class </keyword>")?,
-            Keyword::Constructor => write!(self.output, "<keyword> constructor </eyword>")?,
-            Keyword::Function => write!(self.output, "<keyword> function </keyword>")?,
-            Keyword::Method => write!(self.output, "<keyword> method </keyword>")?,
-            Keyword::Field => write!(self.output, "<keyword> field </keyword>")?,
-            Keyword::Static => write!(self.output, "<keyword> static </keyword>")?,
-            Keyword::Var => write!(self.output, "<keyword> var </keyword>")?,
-            Keyword::Int => write!(self.output, "<keyword> int </keyword>")?,
-            Keyword::Char => write!(self.output, "<keyword> char </keyword>")?,
-            Keyword::Boolean => write!(self.output, "<keyword> boolean </keyword>")?,
-            Keyword::Void => write!(self.output, "<keyword> void </keyword>")?,
-            Keyword::True => write!(self.output, "<keyword> true </keyword>")?,
-            Keyword::False => write!(self.output, "<keyword> false </keyword>")?,
-            Keyword::Null => write!(self.output, "<keyword> null </keyword>")?,
-            Keyword::This => write!(self.output, "<keyword> this </keyword>")?,
-            Keyword::Let => write!(self.output, "<keyword> let </keyword>")?,
-            Keyword::Do => write!(self.output, "<keyword> do </keyword>")?,
-            Keyword::If => write!(self.output, "<keyword> if </keyword>")?,
-            Keyword::Else => write!(self.output, "<keyword> else </keyword>")?,
-            Keyword::While => write!(self.output, "<keyword> while </keyword>")?,
-            Keyword::Return => write!(self.output, "<keyword> return </keyword>")?,
+            Keyword::Class => write!(self.output, "<keyword> class </keyword>\n")?,
+            Keyword::Constructor => write!(self.output, "<keyword> constructor </keyword>\n")?,
+            Keyword::Function => write!(self.output, "<keyword> function </keyword>\n")?,
+            Keyword::Method => write!(self.output, "<keyword> method </keyword>\n")?,
+            Keyword::Field => write!(self.output, "<keyword> field </keyword>\n")?,
+            Keyword::Static => write!(self.output, "<keyword> static </keyword>\n")?,
+            Keyword::Var => write!(self.output, "<keyword> var </keyword>\n")?,
+            Keyword::Int => write!(self.output, "<keyword> int </keyword>\n")?,
+            Keyword::Char => write!(self.output, "<keyword> char </keyword>\n")?,
+            Keyword::Boolean => write!(self.output, "<keyword> boolean </keyword>\n")?,
+            Keyword::Void => write!(self.output, "<keyword> void </keyword>\n")?,
+            Keyword::True => write!(self.output, "<keyword> true </keyword>\n")?,
+            Keyword::False => write!(self.output, "<keyword> false </keyword>\n")?,
+            Keyword::Null => write!(self.output, "<keyword> null </keyword>\n")?,
+            Keyword::This => write!(self.output, "<keyword> this </keyword>\n")?,
+            Keyword::Let => write!(self.output, "<keyword> let </keyword>\n")?,
+            Keyword::Do => write!(self.output, "<keyword> do </keyword>\n")?,
+            Keyword::If => write!(self.output, "<keyword> if </keyword>\n")?,
+            Keyword::Else => write!(self.output, "<keyword> else </keyword>\n")?,
+            Keyword::While => write!(self.output, "<keyword> while </keyword>\n")?,
+            Keyword::Return => write!(self.output, "<keyword> return </keyword>\n")?,
         }
 
         Ok(())
@@ -104,25 +104,25 @@ impl<'a> Compiler<'a> {
         };
 
         match symbol {
-            Symbol::LeftCurlyBracket => write!(self.output, "<symbol> {{ </symbol>")?,
-            Symbol::RightCurlyBracket => write!(self.output, "<symbol> }} </symbol>")?,
-            Symbol::LeftRoundBracket => write!(self.output, "<symbol> ( </symbol>")?,
-            Symbol::RightRoundBracket => write!(self.output, "<symbol> ) </symbol>")?,
-            Symbol::LeftSquareBracket => write!(self.output, "<symbol> [ </symbol>")?,
-            Symbol::RightSquareBracket => write!(self.output, "<symbol> ] </symbol>")?,
-            Symbol::Dot => write!(self.output, "<symbol> . </symbol>")?,
-            Symbol::Comma => write!(self.output, "<symbol> , </symbol>")?,
-            Symbol::Semicolon => write!(self.output, "<symbol> ; </symbol>")?,
-            Symbol::Plus => write!(self.output, "<symbol> + </symbol>")?,
-            Symbol::Minus => write!(self.output, "<symbol> - </symbol>")?,
-            Symbol::Times => write!(self.output, "<symbol> * </symbol>")?,
-            Symbol::Divide => write!(self.output, "<symbol> / </symbol>")?,
-            Symbol::And => write!(self.output, "<symbol> &amp; </symbol>")?,
-            Symbol::Or => write!(self.output, "<symbol> | </symbol>")?,
-            Symbol::SmallerThan => write!(self.output, "<symbol> &lt; </symbol>")?,
-            Symbol::GreaterThan => write!(self.output, "<symbol> &gt; </symbol>")?,
-            Symbol::Equal => write!(self.output, "<symbol> = </symbol>")?,
-            Symbol::Not => write!(self.output, "<symbol> ! </symbol>")?,
+            Symbol::LeftCurlyBracket => write!(self.output, "<symbol> {{ </symbol>\n")?,
+            Symbol::RightCurlyBracket => write!(self.output, "<symbol> }} </symbol>\n")?,
+            Symbol::LeftRoundBracket => write!(self.output, "<symbol> ( </symbol>\n")?,
+            Symbol::RightRoundBracket => write!(self.output, "<symbol> ) </symbol>\n")?,
+            Symbol::LeftSquareBracket => write!(self.output, "<symbol> [ </symbol>\n")?,
+            Symbol::RightSquareBracket => write!(self.output, "<symbol> ] </symbol>\n")?,
+            Symbol::Dot => write!(self.output, "<symbol> . </symbol>\n")?,
+            Symbol::Comma => write!(self.output, "<symbol> , </symbol>\n")?,
+            Symbol::Semicolon => write!(self.output, "<symbol> ; </symbol>\n")?,
+            Symbol::Plus => write!(self.output, "<symbol> + </symbol>\n")?,
+            Symbol::Minus => write!(self.output, "<symbol> - </symbol>\n")?,
+            Symbol::Times => write!(self.output, "<symbol> * </symbol>\n")?,
+            Symbol::Divide => write!(self.output, "<symbol> / </symbol>\n")?,
+            Symbol::And => write!(self.output, "<symbol> &amp; </symbol>\n")?,
+            Symbol::Or => write!(self.output, "<symbol> | </symbol>\n")?,
+            Symbol::SmallerThan => write!(self.output, "<symbol> &lt; </symbol>\n")?,
+            Symbol::GreaterThan => write!(self.output, "<symbol> &gt; </symbol>\n")?,
+            Symbol::Equal => write!(self.output, "<symbol> = </symbol>\n")?,
+            Symbol::Not => write!(self.output, "<symbol> ! </symbol>\n")?,
         }
 
         Ok(())
@@ -139,7 +139,7 @@ impl<'a> Compiler<'a> {
     fn compile_identifier(&mut self) -> Result<()> {
         match &self.current_token {
             Some(Token::Identifier(IdentifierValue { value })) => {
-                write!(self.output, "<identifier> {} </identifier>", value)?;
+                write!(self.output, "<identifier> {} </identifier>\n", value)?;
                 Ok(())
             }
             _ => bail!(
@@ -151,7 +151,7 @@ impl<'a> Compiler<'a> {
 
     // Pogram structure
     fn compile_class(&mut self) -> Result<()> {
-        write!(self.output, "<class>")?;
+        write!(self.output, "<class>\n")?;
 
         self.compile_keyword(Keyword::Class)?;
 
@@ -180,12 +180,12 @@ impl<'a> Compiler<'a> {
 
         self.compile_symbol(Symbol::RightCurlyBracket)?;
 
-        write!(self.output, "</class>")?;
+        write!(self.output, "</class>\n")?;
         Ok(())
     }
 
     fn compile_classvardec(&mut self) -> Result<()> {
-        write!(self.output, "<classVarDec>")?;
+        write!(self.output, "<classVarDec>\n")?;
 
         match self.current_token {
             Some(Token::Keyword(Keyword::Static)) => self.compile_keyword(Keyword::Static)?,
@@ -214,31 +214,31 @@ impl<'a> Compiler<'a> {
 
         self.compile_symbol(Symbol::Semicolon)?;
 
-        write!(self.output, "</classVarDec>")?;
+        write!(self.output, "</classVarDec>\n")?;
         Ok(())
     }
 
     fn compile_type(&mut self) -> Result<()> {
         match &self.current_token {
             Some(Token::Keyword(Keyword::Int)) => {
-                write!(self.output, "<type>")?;
+                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Int)?;
-                write!(self.output, "</type>")?;
+                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Keyword(Keyword::Char)) => {
-                write!(self.output, "<type>")?;
+                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Char)?;
-                write!(self.output, "</type>")?;
+                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Keyword(Keyword::Boolean)) => {
-                write!(self.output, "<type>")?;
+                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Boolean)?;
-                write!(self.output, "</type>")?;
+                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Identifier(_)) => {
-                write!(self.output, "<type>")?;
+                //write!(self.output, "\n<type>\n")?;
                 self.compile_identifier()?;
-                write!(self.output, "</type>")?;
+                //write!(self.output, "\n</type>\n")?;
             }
             _ => bail!(
                 "Expected to find type. But found this instead: {:?}.",
@@ -250,7 +250,7 @@ impl<'a> Compiler<'a> {
     }
 
     fn compile_subroutinedec(&mut self) -> Result<()> {
-        write!(self.output, "<subRoutineDec>")?;
+        write!(self.output, "<subroutineDec>\n")?;
 
         match &self.current_token {
             Some(Token::Keyword(Keyword::Constructor)) => {
@@ -284,13 +284,13 @@ impl<'a> Compiler<'a> {
         self.current_token = self.tokenizer.next();
         self.compile_subroutinebody()?;
 
-        write!(self.output, "</subRoutineDec>")?;
+        write!(self.output, "</subroutineDec>\n")?;
 
         Ok(())
     }
 
     fn compile_parameterlist(&mut self) -> Result<()> {
-        write!(self.output, "<parameterList>")?;
+        write!(self.output, "<parameterList>\n")?;
 
         match self.compile_type() {
             Ok(_) => {
@@ -309,13 +309,13 @@ impl<'a> Compiler<'a> {
             Err(_) => {}
         };
 
-        write!(self.output, "</parameterList>")?;
+        write!(self.output, "</parameterList>\n")?;
 
         Ok(())
     }
 
     fn compile_subroutinebody(&mut self) -> Result<()> {
-        write!(self.output, "<subRoutineBody>")?;
+        write!(self.output, "<subroutineBody>\n")?;
 
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
@@ -326,19 +326,23 @@ impl<'a> Compiler<'a> {
             self.current_token = self.tokenizer.next();
         }
 
+        write!(self.output, "<statements>\n")?;
+
         while self.compile_statement().is_ok() {
             self.current_token = self.tokenizer.next();
         }
 
+        write!(self.output, "</statements>\n")?;
+
         self.compile_symbol(Symbol::RightCurlyBracket)?;
 
-        write!(self.output, "</subRoutineBody>")?;
+        write!(self.output, "</subroutineBody>\n")?;
 
         Ok(())
     }
 
     fn compile_vardec(&mut self) -> Result<()> {
-        write!(self.output, "<varDec>")?;
+        write!(self.output, "<varDec>\n")?;
 
         self.compile_keyword(Keyword::Var)?;
 
@@ -360,7 +364,7 @@ impl<'a> Compiler<'a> {
 
         self.compile_symbol(Symbol::Semicolon)?;
 
-        write!(self.output, "</varDec>")?;
+        write!(self.output, "</varDec>\n")?;
 
         Ok(())
     }
@@ -369,29 +373,29 @@ impl<'a> Compiler<'a> {
     fn compile_statement(&mut self) -> Result<()> {
         match self.current_token {
             Some(Token::Keyword(Keyword::Let)) => {
-                write!(self.output, "<statement>")?;
+                //write!(self.output, "<statement>\n")?;
                 self.compile_let_statement()?;
-                write!(self.output, "</statement>")?;
+                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::If)) => {
-                write!(self.output, "<statement>")?;
+                //write!(self.output, "<statement>\n")?;
                 self.compile_if_statement()?;
-                write!(self.output, "</statement>")?;
+                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::While)) =>{
-                write!(self.output, "<statement>")?;
+                //write!(self.output, "<statement>\n")?;
                 self.compile_while_statement()?;
-                write!(self.output, "</statement>")?;
+                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::Do)) => {
-                write!(self.output, "<statement>")?;
+                //write!(self.output, "<statement>\n")?;
                 self.compile_do_statement()?;
-                write!(self.output, "</statement>")?;
+                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::Return)) =>{
-                write!(self.output, "<statement>")?;
+                //write!(self.output, "<statement>\n")?;
                 self.compile_return_statement()?;
-                write!(self.output, "</statement>")?;
+                //write!(self.output, "</statement>\n")?;
             }
             _ => bail!(
                 "Expected to find 'let', 'if', 'while', 'do', or 'return'. But found this instead: {:?}.",
@@ -403,14 +407,12 @@ impl<'a> Compiler<'a> {
     }
 
     fn compile_let_statement(&mut self) -> Result<()> {
-        write!(self.output, "<letStatment>")?;
+        write!(self.output, "<letStatement>\n")?;
 
         self.compile_keyword(Keyword::Let)?;
 
         self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
-
-        //todo!("Compile array indexing")
 
         self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::Equal)?;
@@ -421,13 +423,13 @@ impl<'a> Compiler<'a> {
         self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::Semicolon)?;
 
-        write!(self.output, "</letStatment>")?;
+        write!(self.output, "</letStatement>\n")?;
 
         Ok(())
     }
 
     fn compile_if_statement(&mut self) -> Result<()> {
-        write!(self.output, "<ifStatement>")?;
+        write!(self.output, "<ifStatement>\n")?;
 
         self.compile_keyword(Keyword::If)?;
 
@@ -443,9 +445,13 @@ impl<'a> Compiler<'a> {
         self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
+        write!(self.output, "<statements>\n")?;
+
         while self.compile_statement().is_ok() {
             self.current_token = self.tokenizer.next();
         }
+
+        write!(self.output, "</statements>\n")?;
 
         self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::RightCurlyBracket)?;
@@ -458,21 +464,25 @@ impl<'a> Compiler<'a> {
             self.current_token = self.tokenizer.next();
             self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
+            write!(self.output, "<statements>\n")?;
+
             while self.compile_statement().is_ok() {
                 self.current_token = self.tokenizer.next();
             }
+
+            write!(self.output, "</statements>\n")?;
 
             self.current_token = self.tokenizer.next();
             self.compile_symbol(Symbol::RightCurlyBracket)?;
         }
 
-        write!(self.output, "</ifStatement>")?;
+        write!(self.output, "</ifStatement>\n")?;
 
         Ok(())
     }
 
     fn compile_while_statement(&mut self) -> Result<()> {
-        write!(self.output, "<whileStatment>")?;
+        write!(self.output, "<whileStatement>\n")?;
 
         self.compile_keyword(Keyword::While)?;
 
@@ -495,13 +505,13 @@ impl<'a> Compiler<'a> {
         self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::RightCurlyBracket)?;
 
-        write!(self.output, "</whileStatment>")?;
+        write!(self.output, "</whileStatement>\n")?;
 
         Ok(())
     }
 
     fn compile_do_statement(&mut self) -> Result<()> {
-        write!(self.output, "<doStatement>")?;
+        write!(self.output, "<doStatement>\n")?;
 
         self.compile_keyword(Keyword::Do)?;
 
@@ -511,42 +521,66 @@ impl<'a> Compiler<'a> {
         self.current_token = self.tokenizer.next(); // probably remove after implementing compile_subroutine_call()
         self.compile_symbol(Symbol::Semicolon)?;
 
-        write!(self.output, "</doStatement>")?;
+        write!(self.output, "</doStatement>\n")?;
 
         Ok(())
     }
 
     fn compile_return_statement(&mut self) -> Result<()> {
-        write!(self.output, "<returnStatement>")?;
+        write!(self.output, "<returnStatement>\n")?;
 
         self.compile_keyword(Keyword::Return)?;
 
         self.current_token = self.tokenizer.next();
 
-        if self.compile_expression().is_ok() {
-            self.current_token = self.tokenizer.next(); // probably remove after implementing compile_expression()
+        if self.is_expression() {
+            self.compile_expression();
+            self.current_token = self.tokenizer.next();
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
 
-        write!(self.output, "</returnStatement>")?;
+        write!(self.output, "</returnStatement>\n")?;
 
         Ok(())
     }
 
     // Expressions
     fn compile_expression(&mut self) -> Result<()> {
-        // todo!("Implement other cases");
-        self.compile_identifier()
+
+        println!("compiling expression: {:?}", &self.current_token);
+
+        match &self.current_token {
+            Some(Token::Identifier(value)) => {
+                write!(self.output, "<expression>\n")?;
+                self.compile_term()?;
+                write!(self.output, "</expression>\n")?;
+            }
+            _ => {}
+
+        }
+
+        Ok(())
     }
 
     fn compile_term(&mut self) -> Result<()> {
-        todo!();
+        println!("compiling term: {:?}", &self.current_token);
+
+        match &self.current_token {
+            Some(Token::Identifier(value)) => {
+                write!(self.output, "<term>\n")?;
+                self.compile_identifier()?;
+                write!(self.output, "</term>\n")?;
+            }
+            _ => {}
+
+        }
+
+
+        Ok(())
     }
 
     fn compile_subroutine_call(&mut self) -> Result<()> {
-        write!(self.output, "<subroutineCall>")?;
-
         self.compile_identifier()?;
 
         self.current_token = self.tokenizer.next();
@@ -566,26 +600,26 @@ impl<'a> Compiler<'a> {
 
         self.compile_symbol(Symbol::RightRoundBracket)?;
 
-        write!(self.output, "</subroutineCall>")?;
-
         Ok(())
     }
 
     fn compile_expression_list(&mut self) -> Result<()> {
-        write!(self.output, "<expressionList>")?;
+        write!(self.output, "<expressionList>\n")?;
 
-        match self.compile_expression() {
-            Ok(_) => {
-                self.current_token = self.tokenizer.next();
-                while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
+        if self.is_expression() {
+            match self.compile_expression() {
+                Ok(_) => {
                     self.current_token = self.tokenizer.next();
-                    self.compile_expression()?;
+                    while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
+                        self.current_token = self.tokenizer.next();
+                        self.compile_expression()?;
+                    }
                 }
+                Err(_) => {}
             }
-            Err(_) => {}
-        };
+        }
 
-        write!(self.output, "</expressionList>")?;
+        write!(self.output, "</expressionList>\n")?;
 
         Ok(())
     }
@@ -600,5 +634,25 @@ impl<'a> Compiler<'a> {
 
     fn compile_keyword_constant(&mut self) -> Result<()> {
         todo!();
+    }
+
+    // Utilitites
+    fn is_expression(&self) -> bool {
+        match &self.current_token {
+            Some(Token::Identifier(value)) => true,
+            _ => false
+        }
+
+    }
+
+    fn is_statement(&self) -> bool {
+        match self.current_token {
+            Some(Token::Keyword(Keyword::Let)) => true,
+            Some(Token::Keyword(Keyword::If)) => true ,
+            Some(Token::Keyword(Keyword::While)) => true ,
+            Some(Token::Keyword(Keyword::Do)) => true ,
+            Some(Token::Keyword(Keyword::Return)) => true ,
+            _ => false,
+        }
     }
 }

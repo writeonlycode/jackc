@@ -12,15 +12,6 @@ class Main {
     function void main() {
         var SquareGame game;
         let game = game;
-
-        if (b) {
-        }
-        else {              // There is no else keyword in the Square files.
-        }
-
-        while (b) {
-        }
-
         do game.run();
         do game.dispose();
         return;
@@ -32,6 +23,6 @@ class Main {
         }
         else {              // There is no else keyword in the Square files.
         }
-        return a;
+        return;
     }
 }
