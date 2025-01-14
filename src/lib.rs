@@ -24,7 +24,7 @@ pub fn run(config: Config) -> Result<()> {
                 let in_file = File::open(in_file_path)?;
                 let mut buf_reader = BufReader::new(in_file);
 
-                let mut tokenizer = Tokenizer::new(&mut buf_reader);
+                let mut tokenizer = Tokenizer::new(&mut buf_reader).peekable();
 
                 let out_file_path = entry.path().with_extension("xml");
                 let mut out_file = File::create(out_file_path)?;

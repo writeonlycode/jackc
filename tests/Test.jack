@@ -1,9 +1,0 @@
-// This is a comment
-/* This is an inline comment */
-/** Initializes a new Square Dance game and starts running it. */
-"string constant"
-
-class Main {
-  var foo;
-  let foo = 1001;
-}

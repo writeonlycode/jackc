@@ -2,15 +2,16 @@ use crate::tokenizer::*;
 use anyhow::{bail, Result};
 use std::fs::File;
 use std::io::Write;
+use std::iter::Peekable;
 
 pub struct Compiler<'a> {
-    tokenizer: &'a mut Tokenizer<'a>,
+    tokenizer: &'a mut Peekable<Tokenizer<'a>>,
     output: &'a mut File,
     current_token: Option<Token>,
 }
 
 impl<'a> Compiler<'a> {
-    pub fn new(tokenizer: &'a mut Tokenizer<'a>, output: &'a mut File) -> Self {
+    pub fn new(tokenizer: &'a mut Peekable<Tokenizer<'a>>, output: &'a mut File) -> Self {
         Compiler {
             tokenizer,
             output,
@@ -76,6 +77,7 @@ impl<'a> Compiler<'a> {
             Keyword::Return => write!(self.output, "<keyword> return </keyword>\n")?,
         }
 
+        self.current_token = self.tokenizer.next();
         Ok(())
     }
 
@@ -98,7 +100,8 @@ impl<'a> Compiler<'a> {
                 }
             }
             _ => bail!(
-                "Expected to find a symbol. But found this instead: {:?}",
+                "Expected to find symbol {:?}. But found this instead: {:?}",
+                expected_symbol,
                 token
             ),
         };
@@ -122,52 +125,77 @@ impl<'a> Compiler<'a> {
             Symbol::SmallerThan => write!(self.output, "<symbol> &lt; </symbol>\n")?,
             Symbol::GreaterThan => write!(self.output, "<symbol> &gt; </symbol>\n")?,
             Symbol::Equal => write!(self.output, "<symbol> = </symbol>\n")?,
-            Symbol::Not => write!(self.output, "<symbol> ! </symbol>\n")?,
+            Symbol::Not => write!(self.output, "<symbol> ~ </symbol>\n")?,
         }
 
+        self.current_token = self.tokenizer.next();
         Ok(())
     }
 
-    fn compile_integer_constant(tokenizer: &mut Tokenizer, output: &mut File) -> Result<()> {
-        todo!();
+    fn compile_integer_constant(&mut self) -> Result<()> {
+        match &self.current_token {
+            Some(Token::IntegerConstant(IntegerConstantValue { value })) => {
+                write!(
+                    self.output,
+                    "<integerConstant> {} </integerConstant>\n",
+                    value
+                )?;
+            }
+            _ => bail!(
+                "Expected to find integer constant. But found this instead: {:?}.",
+                self.current_token
+            ),
+        }
+
+        self.current_token = self.tokenizer.next();
+        Ok(())
     }
 
-    fn compile_string_constant(tokenizer: &mut Tokenizer, output: &mut File) -> Result<()> {
-        todo!();
+    fn compile_string_constant(&mut self) -> Result<()> {
+        match &self.current_token {
+            Some(Token::StringConstant(value)) => {
+                write!(
+                    self.output,
+                    "<stringConstant> {} </stringConstant>\n",
+                    value
+                )?;
+            }
+            _ => bail!(
+                "Expected to find string constant. But found this instead: {:?}.",
+                self.current_token
+            ),
+        }
+
+        self.current_token = self.tokenizer.next();
+        Ok(())
     }
 
     fn compile_identifier(&mut self) -> Result<()> {
         match &self.current_token {
             Some(Token::Identifier(IdentifierValue { value })) => {
                 write!(self.output, "<identifier> {} </identifier>\n", value)?;
-                Ok(())
             }
             _ => bail!(
                 "Expected to find identifier. But found this instead: {:?}.",
                 self.current_token
             ),
         }
+
+        self.current_token = self.tokenizer.next();
+        Ok(())
     }
 
     // Pogram structure
     fn compile_class(&mut self) -> Result<()> {
         write!(self.output, "<class>\n")?;
-
         self.compile_keyword(Keyword::Class)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
-
-        self.current_token = self.tokenizer.next();
 
         while self.current_token == Some(Token::Keyword(Keyword::Static))
             || self.current_token == Some(Token::Keyword(Keyword::Field))
         {
             self.compile_classvardec()?;
-            self.current_token = self.tokenizer.next();
         }
 
         while self.current_token == Some(Token::Keyword(Keyword::Constructor))
@@ -175,12 +203,11 @@ impl<'a> Compiler<'a> {
             || self.current_token == Some(Token::Keyword(Keyword::Method))
         {
             self.compile_subroutinedec()?;
-            self.current_token = self.tokenizer.next();
         }
 
         self.compile_symbol(Symbol::RightCurlyBracket)?;
-
         write!(self.output, "</class>\n")?;
+
         Ok(())
     }
 
@@ -196,24 +223,15 @@ impl<'a> Compiler<'a> {
             ),
         }
 
-        self.current_token = self.tokenizer.next();
         self.compile_type()?;
-
-        // one or more var name
-        self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
-
-        self.current_token = self.tokenizer.next();
 
         while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
             self.compile_symbol(Symbol::Comma)?;
-            self.current_token = self.tokenizer.next();
             self.compile_identifier()?;
-            self.current_token = self.tokenizer.next();
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
-
         write!(self.output, "</classVarDec>\n")?;
         Ok(())
     }
@@ -221,24 +239,16 @@ impl<'a> Compiler<'a> {
     fn compile_type(&mut self) -> Result<()> {
         match &self.current_token {
             Some(Token::Keyword(Keyword::Int)) => {
-                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Int)?;
-                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Keyword(Keyword::Char)) => {
-                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Char)?;
-                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Keyword(Keyword::Boolean)) => {
-                //write!(self.output, "\n<type>\n")?;
                 self.compile_keyword(Keyword::Boolean)?;
-                //write!(self.output, "\n</type>\n")?;
             }
             Some(Token::Identifier(_)) => {
-                //write!(self.output, "\n<type>\n")?;
                 self.compile_identifier()?;
-                //write!(self.output, "\n</type>\n")?;
             }
             _ => bail!(
                 "Expected to find type. But found this instead: {:?}.",
@@ -264,28 +274,18 @@ impl<'a> Compiler<'a> {
             ),
         }
 
-        self.current_token = self.tokenizer.next();
-
         match &self.current_token {
             Some(Token::Keyword(Keyword::Void)) => self.compile_keyword(Keyword::Void)?,
             _ => self.compile_type()?,
         }
 
-        self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_parameterlist()?;
         self.compile_symbol(Symbol::RightRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_subroutinebody()?;
 
         write!(self.output, "</subroutineDec>\n")?;
-
         Ok(())
     }
 
@@ -294,15 +294,11 @@ impl<'a> Compiler<'a> {
 
         match self.compile_type() {
             Ok(_) => {
-                self.current_token = self.tokenizer.next();
                 self.compile_identifier()?;
 
-                self.current_token = self.tokenizer.next();
                 while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
-                    self.current_token = self.tokenizer.next();
+                    self.compile_symbol(Symbol::Comma)?;
                     self.compile_type()?;
-
-                    self.current_token = self.tokenizer.next();
                     self.compile_identifier()?;
                 }
             }
@@ -310,7 +306,6 @@ impl<'a> Compiler<'a> {
         };
 
         write!(self.output, "</parameterList>\n")?;
-
         Ok(())
     }
 
@@ -319,17 +314,14 @@ impl<'a> Compiler<'a> {
 
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
-        self.current_token = self.tokenizer.next();
-
         while self.current_token == Some(Token::Keyword(Keyword::Var)) {
             self.compile_vardec()?;
-            self.current_token = self.tokenizer.next();
         }
 
         write!(self.output, "<statements>\n")?;
 
-        while self.compile_statement().is_ok() {
-            self.current_token = self.tokenizer.next();
+        while self.is_statement() {
+            self.compile_statement()?;
         }
 
         write!(self.output, "</statements>\n")?;
@@ -337,7 +329,6 @@ impl<'a> Compiler<'a> {
         self.compile_symbol(Symbol::RightCurlyBracket)?;
 
         write!(self.output, "</subroutineBody>\n")?;
-
         Ok(())
     }
 
@@ -345,27 +336,17 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<varDec>\n")?;
 
         self.compile_keyword(Keyword::Var)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_type()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
-
-        self.current_token = self.tokenizer.next();
 
         while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
             self.compile_symbol(Symbol::Comma)?;
-            self.current_token = self.tokenizer.next();
-
             self.compile_identifier()?;
-            self.current_token = self.tokenizer.next();
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
 
         write!(self.output, "</varDec>\n")?;
-
         Ok(())
     }
 
@@ -373,29 +354,19 @@ impl<'a> Compiler<'a> {
     fn compile_statement(&mut self) -> Result<()> {
         match self.current_token {
             Some(Token::Keyword(Keyword::Let)) => {
-                //write!(self.output, "<statement>\n")?;
                 self.compile_let_statement()?;
-                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::If)) => {
-                //write!(self.output, "<statement>\n")?;
                 self.compile_if_statement()?;
-                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::While)) =>{
-                //write!(self.output, "<statement>\n")?;
                 self.compile_while_statement()?;
-                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::Do)) => {
-                //write!(self.output, "<statement>\n")?;
                 self.compile_do_statement()?;
-                //write!(self.output, "</statement>\n")?;
             }
             Some(Token::Keyword(Keyword::Return)) =>{
-                //write!(self.output, "<statement>\n")?;
                 self.compile_return_statement()?;
-                //write!(self.output, "</statement>\n")?;
             }
             _ => bail!(
                 "Expected to find 'let', 'if', 'while', 'do', or 'return'. But found this instead: {:?}.",
@@ -410,21 +381,19 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<letStatement>\n")?;
 
         self.compile_keyword(Keyword::Let)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_identifier()?;
 
-        self.current_token = self.tokenizer.next();
+        if self.current_token == Some(Token::Symbol(Symbol::LeftSquareBracket)) {
+            self.compile_symbol(Symbol::LeftSquareBracket)?;
+            self.compile_expression()?;
+            self.compile_symbol(Symbol::RightSquareBracket)?;
+        }
+
         self.compile_symbol(Symbol::Equal)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_expression()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::Semicolon)?;
 
         write!(self.output, "</letStatement>\n")?;
-
         Ok(())
     }
 
@@ -432,52 +401,37 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<ifStatement>\n")?;
 
         self.compile_keyword(Keyword::If)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_expression()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::RightRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
         write!(self.output, "<statements>\n")?;
 
-        while self.compile_statement().is_ok() {
-            self.current_token = self.tokenizer.next();
+        while self.is_statement() {
+            self.compile_statement()?;
         }
 
         write!(self.output, "</statements>\n")?;
 
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::RightCurlyBracket)?;
-
-        self.current_token = self.tokenizer.next();
 
         if self.current_token == Some(Token::Keyword(Keyword::Else)) {
             self.compile_keyword(Keyword::Else)?;
-
-            self.current_token = self.tokenizer.next();
             self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
             write!(self.output, "<statements>\n")?;
 
-            while self.compile_statement().is_ok() {
-                self.current_token = self.tokenizer.next();
+            while self.is_statement() {
+                self.compile_statement()?;
             }
 
             write!(self.output, "</statements>\n")?;
 
-            self.current_token = self.tokenizer.next();
             self.compile_symbol(Symbol::RightCurlyBracket)?;
         }
 
         write!(self.output, "</ifStatement>\n")?;
-
         Ok(())
     }
 
@@ -485,28 +439,22 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<whileStatement>\n")?;
 
         self.compile_keyword(Keyword::While)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_expression()?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::RightRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
 
-        while self.compile_statement().is_ok() {
-            self.current_token = self.tokenizer.next();
+        write!(self.output, "<statements>\n")?;
+
+        while self.is_statement() {
+            self.compile_statement()?;
         }
 
-        self.current_token = self.tokenizer.next();
+        write!(self.output, "</statements>\n")?;
+
         self.compile_symbol(Symbol::RightCurlyBracket)?;
 
         write!(self.output, "</whileStatement>\n")?;
-
         Ok(())
     }
 
@@ -514,15 +462,10 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<doStatement>\n")?;
 
         self.compile_keyword(Keyword::Do)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_subroutine_call()?;
-
-        self.current_token = self.tokenizer.next(); // probably remove after implementing compile_subroutine_call()
         self.compile_symbol(Symbol::Semicolon)?;
 
         write!(self.output, "</doStatement>\n")?;
-
         Ok(())
     }
 
@@ -531,73 +474,102 @@ impl<'a> Compiler<'a> {
 
         self.compile_keyword(Keyword::Return)?;
 
-        self.current_token = self.tokenizer.next();
-
         if self.is_expression() {
-            self.compile_expression();
-            self.current_token = self.tokenizer.next();
+            self.compile_expression()?;
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
 
         write!(self.output, "</returnStatement>\n")?;
-
         Ok(())
     }
 
     // Expressions
     fn compile_expression(&mut self) -> Result<()> {
+        write!(self.output, "<expression>\n")?;
 
-        println!("compiling expression: {:?}", &self.current_token);
+        self.compile_term()?;
 
-        match &self.current_token {
-            Some(Token::Identifier(value)) => {
-                write!(self.output, "<expression>\n")?;
-                self.compile_term()?;
-                write!(self.output, "</expression>\n")?;
-            }
-            _ => {}
-
+        while self.is_op() {
+            self.compile_op()?;
+            self.compile_term()?;
         }
+
+        write!(self.output, "</expression>\n")?;
 
         Ok(())
     }
 
     fn compile_term(&mut self) -> Result<()> {
-        println!("compiling term: {:?}", &self.current_token);
+        write!(self.output, "<term>\n")?;
 
         match &self.current_token {
-            Some(Token::Identifier(value)) => {
-                write!(self.output, "<term>\n")?;
-                self.compile_identifier()?;
-                write!(self.output, "</term>\n")?;
+            Some(Token::IntegerConstant(_value)) => {
+                self.compile_integer_constant()?;
             }
-            _ => {}
-
+            Some(Token::StringConstant(_value)) => {
+                self.compile_string_constant()?;
+            }
+            Some(Token::Keyword(Keyword::True)) => {
+                self.compile_keyword(Keyword::True)?;
+            }
+            Some(Token::Keyword(Keyword::False)) => {
+                self.compile_keyword(Keyword::False)?;
+            }
+            Some(Token::Keyword(Keyword::Null)) => {
+                self.compile_keyword(Keyword::Null)?;
+            }
+            Some(Token::Keyword(Keyword::This)) => {
+                self.compile_keyword(Keyword::This)?;
+            }
+            Some(Token::Identifier(_value)) => {
+                if self.tokenizer.peek() == Some(&Token::Symbol(Symbol::LeftSquareBracket)) {
+                    // Process array indexing
+                    self.compile_identifier()?;
+                    self.compile_symbol(Symbol::LeftSquareBracket)?;
+                    self.compile_expression()?;
+                    self.compile_symbol(Symbol::RightSquareBracket)?;
+                } else if self.tokenizer.peek() == Some(&Token::Symbol(Symbol::LeftRoundBracket)) {
+                    self.compile_subroutine_call()?;
+                } else if self.tokenizer.peek() == Some(&Token::Symbol(Symbol::Dot)) {
+                    self.compile_subroutine_call()?;
+                } else {
+                    self.compile_identifier()?;
+                }
+            }
+            Some(Token::Symbol(Symbol::LeftRoundBracket)) => {
+                self.compile_symbol(Symbol::LeftRoundBracket)?;
+                self.compile_expression()?;
+                self.compile_symbol(Symbol::RightRoundBracket)?;
+            }
+            Some(Token::Symbol(Symbol::Minus)) => {
+                self.compile_symbol(Symbol::Minus)?;
+                self.compile_term()?;
+            }
+            Some(Token::Symbol(Symbol::Not)) => {
+                self.compile_symbol(Symbol::Not)?;
+                self.compile_term()?;
+            }
+            _ => bail!(
+                "Expected to find term. But found this instead: {:?}.",
+                self.current_token
+            ),
         }
 
-
+        write!(self.output, "</term>\n")?;
         Ok(())
     }
 
     fn compile_subroutine_call(&mut self) -> Result<()> {
         self.compile_identifier()?;
 
-        self.current_token = self.tokenizer.next();
-
         if self.current_token == Some(Token::Symbol(Symbol::Dot)) {
             self.compile_symbol(Symbol::Dot)?;
-
-            self.current_token = self.tokenizer.next();
             self.compile_identifier()?;
-            self.current_token = self.tokenizer.next();
         }
 
         self.compile_symbol(Symbol::LeftRoundBracket)?;
-
-        self.current_token = self.tokenizer.next();
         self.compile_expression_list()?;
-
         self.compile_symbol(Symbol::RightRoundBracket)?;
 
         Ok(())
@@ -607,51 +579,77 @@ impl<'a> Compiler<'a> {
         write!(self.output, "<expressionList>\n")?;
 
         if self.is_expression() {
-            match self.compile_expression() {
-                Ok(_) => {
-                    self.current_token = self.tokenizer.next();
-                    while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
-                        self.current_token = self.tokenizer.next();
-                        self.compile_expression()?;
-                    }
-                }
-                Err(_) => {}
+            self.compile_expression()?;
+
+            while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
+                self.compile_symbol(Symbol::Comma)?;
+                self.compile_expression()?;
             }
         }
 
         write!(self.output, "</expressionList>\n")?;
-
         Ok(())
     }
 
     fn compile_op(&mut self) -> Result<()> {
-        todo!();
-    }
+        match self.current_token {
+            Some(Token::Symbol(Symbol::Plus)) => self.compile_symbol(Symbol::Plus)?,
+            Some(Token::Symbol(Symbol::Minus)) => self.compile_symbol(Symbol::Minus)?,
+            Some(Token::Symbol(Symbol::Times)) => self.compile_symbol(Symbol::Times)?,
+            Some(Token::Symbol(Symbol::Divide)) => self.compile_symbol(Symbol::Divide)?,
+            Some(Token::Symbol(Symbol::And)) => self.compile_symbol(Symbol::And)?,
+            Some(Token::Symbol(Symbol::Or)) => self.compile_symbol(Symbol::Or)?,
+            Some(Token::Symbol(Symbol::SmallerThan)) => self.compile_symbol(Symbol::SmallerThan)?,
+            Some(Token::Symbol(Symbol::GreaterThan)) => self.compile_symbol(Symbol::GreaterThan)?,
+            Some(Token::Symbol(Symbol::Equal)) => self.compile_symbol(Symbol::Equal)?,
+            _ => bail!(
+                "Expected op symbol. Found instead: {:?}.",
+                &self.current_token
+            ),
+        };
 
-    fn compile_unary_op(&mut self) -> Result<()> {
-        todo!();
-    }
-
-    fn compile_keyword_constant(&mut self) -> Result<()> {
-        todo!();
+        Ok(())
     }
 
     // Utilitites
     fn is_expression(&self) -> bool {
         match &self.current_token {
-            Some(Token::Identifier(value)) => true,
-            _ => false
+            Some(Token::IntegerConstant(_value)) => true,
+            Some(Token::StringConstant(_value)) => true,
+            Some(Token::Keyword(Keyword::True)) => true,
+            Some(Token::Keyword(Keyword::False)) => true,
+            Some(Token::Keyword(Keyword::Null)) => true,
+            Some(Token::Keyword(Keyword::This)) => true,
+            Some(Token::Identifier(_value)) => true,
+            Some(Token::Symbol(Symbol::LeftRoundBracket)) => true,
+            Some(Token::Symbol(Symbol::Minus)) => true,
+            Some(Token::Symbol(Symbol::Not)) => true,
+            _ => false,
         }
-
     }
 
     fn is_statement(&self) -> bool {
         match self.current_token {
             Some(Token::Keyword(Keyword::Let)) => true,
-            Some(Token::Keyword(Keyword::If)) => true ,
-            Some(Token::Keyword(Keyword::While)) => true ,
-            Some(Token::Keyword(Keyword::Do)) => true ,
-            Some(Token::Keyword(Keyword::Return)) => true ,
+            Some(Token::Keyword(Keyword::If)) => true,
+            Some(Token::Keyword(Keyword::While)) => true,
+            Some(Token::Keyword(Keyword::Do)) => true,
+            Some(Token::Keyword(Keyword::Return)) => true,
+            _ => false,
+        }
+    }
+
+    fn is_op(&self) -> bool {
+        match self.current_token {
+            Some(Token::Symbol(Symbol::Plus)) => true,
+            Some(Token::Symbol(Symbol::Minus)) => true,
+            Some(Token::Symbol(Symbol::Times)) => true,
+            Some(Token::Symbol(Symbol::Divide)) => true,
+            Some(Token::Symbol(Symbol::And)) => true,
+            Some(Token::Symbol(Symbol::Or)) => true,
+            Some(Token::Symbol(Symbol::SmallerThan)) => true,
+            Some(Token::Symbol(Symbol::GreaterThan)) => true,
+            Some(Token::Symbol(Symbol::Equal)) => true,
             _ => false,
         }
     }
