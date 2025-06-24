@@ -186,6 +186,8 @@ impl<'a> Compiler<'a> {
     }
 
     // Pogram structure
+   
+    // Action: Create class level symbol table and subroutine level symbol table.
     fn compile_class(&mut self) -> Result<()> {
         write!(self.output, "<class>\n")?;
         self.compile_keyword(Keyword::Class)?;
@@ -259,6 +261,7 @@ impl<'a> Compiler<'a> {
         Ok(())
     }
 
+    // Action: Reset the subroutine level symbol table.
     fn compile_subroutinedec(&mut self) -> Result<()> {
         write!(self.output, "<subroutineDec>\n")?;
 
@@ -332,6 +335,7 @@ impl<'a> Compiler<'a> {
         Ok(())
     }
 
+    // Variable declaration. Action: add the appropriate entry in the symbol table.
     fn compile_vardec(&mut self) -> Result<()> {
         write!(self.output, "<varDec>\n")?;
 
@@ -485,6 +489,8 @@ impl<'a> Compiler<'a> {
     }
 
     // Expressions
+
+    // Action: Translate infix notation (Jack) to postfix notation (VM).
     fn compile_expression(&mut self) -> Result<()> {
         write!(self.output, "<expression>\n")?;
 
