@@ -1,7 +1,7 @@
 <class>
 <keyword> class </keyword>
 <identifier> 
-<name> Square </name> 
+<name> Bat </name> 
 <category> class </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -29,7 +29,25 @@
 <keyword> field </keyword>
 <keyword> int </keyword>
 <identifier> 
-<name> size </name> 
+<name> width </name> 
+<category> field </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> , </symbol>
+<identifier> 
+<name> height </name> 
+<category> field </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+<keyword> field </keyword>
+<keyword> int </keyword>
+<identifier> 
+<name> direction </name> 
 <category> field </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -39,7 +57,7 @@
 <subroutineDec>
 <keyword> constructor </keyword>
 <identifier> 
-<name> Square </name> 
+<name> Bat </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -54,7 +72,7 @@
 <parameterList>
 <keyword> int </keyword>
 <identifier> 
-<name> ax </name> 
+<name> Ax </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -62,7 +80,7 @@
 <symbol> , </symbol>
 <keyword> int </keyword>
 <identifier> 
-<name> ay </name> 
+<name> Ay </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -70,7 +88,15 @@
 <symbol> , </symbol>
 <keyword> int </keyword>
 <identifier> 
-<name> asize </name> 
+<name> Awidth </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> , </symbol>
+<keyword> int </keyword>
+<identifier> 
+<name> Aheight </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -92,7 +118,7 @@
 <expression>
 <term>
 <identifier> 
-<name> ax </name> 
+<name> Ax </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -113,7 +139,7 @@
 <expression>
 <term>
 <identifier> 
-<name> ay </name> 
+<name> Ay </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -125,7 +151,7 @@
 <letStatement>
 <keyword> let </keyword>
 <identifier> 
-<name> size </name> 
+<name> width </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -134,7 +160,7 @@
 <expression>
 <term>
 <identifier> 
-<name> asize </name> 
+<name> Awidth </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -143,10 +169,47 @@
 </expression>
 <symbol> ; </symbol>
 </letStatement>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> height </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<identifier> 
+<name> Aheight </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
 <doStatement>
 <keyword> do </keyword>
 <identifier> 
-<name> draw </name> 
+<name> show </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -224,6 +287,134 @@
 <keyword> method </keyword>
 <keyword> void </keyword>
 <identifier> 
+<name> show </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> Screen </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
+<name> setColor </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> draw </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> 
+<name> hide </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> Screen </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
+<name> setColor </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> draw </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> 
 <name> draw </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
@@ -246,6 +437,542 @@
 </identifier>
 <symbol> . </symbol>
 <identifier> 
+<name> drawRectangle </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<identifier> 
+<name> y </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<identifier> 
+<name> y </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> height </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> 
+<name> setDirection </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+<keyword> int </keyword>
+<identifier> 
+<name> Adirection </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<identifier> 
+<name> Adirection </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> int </keyword>
+<identifier> 
+<name> getLeft </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<returnStatement>
+<keyword> return </keyword>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> int </keyword>
+<identifier> 
+<name> getRight </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<returnStatement>
+<keyword> return </keyword>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> 
+<name> setWidth </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+<keyword> int </keyword>
+<identifier> 
+<name> Awidth </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> hide </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<identifier> 
+<name> Awidth </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> show </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> 
+<name> move </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> = </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> &lt; </symbol>
+<term>
+<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<letStatement>
+<keyword> let </keyword>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<symbol> = </symbol>
+<expression>
+<term>
+<integerConstant> 0 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> Screen </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
+<name> setColor </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> Screen </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
+<name> drawRectangle </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<identifier> 
+<name> y </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<identifier> 
+<name> x </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 4 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<identifier> 
+<name> y </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> height </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> Screen </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
 <name> setColor </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
@@ -312,12 +1039,7 @@
 </term>
 <symbol> + </symbol>
 <term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
+<integerConstant> 3 </integerConstant>
 </term>
 </expression>
 <symbol> , </symbol>
@@ -333,7 +1055,7 @@
 <symbol> + </symbol>
 <term>
 <identifier> 
-<name> size </name> 
+<name> height </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -344,255 +1066,15 @@
 <symbol> ) </symbol>
 <symbol> ; </symbol>
 </doStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
 </statements>
 <symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> erase </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
+<keyword> else </keyword>
 <symbol> { </symbol>
 <statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> false </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> incSize </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
-<ifStatement>
-<keyword> if </keyword>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> &lt; </symbol>
-<term>
-<integerConstant> 254 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> &amp; </symbol>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> &lt; </symbol>
-<term>
-<integerConstant> 510 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-</expression>
-<symbol> ) </symbol>
-<symbol> { </symbol>
-<statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> erase </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
 <letStatement>
 <keyword> let </keyword>
 <identifier> 
-<name> size </name> 
+<name> x </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -601,7 +1083,7 @@
 <expression>
 <term>
 <identifier> 
-<name> size </name> 
+<name> x </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -609,90 +1091,50 @@
 </term>
 <symbol> + </symbol>
 <term>
-<integerConstant> 2 </integerConstant>
+<integerConstant> 4 </integerConstant>
 </term>
 </expression>
 <symbol> ; </symbol>
 </letStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> draw </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-</statements>
-<symbol> } </symbol>
-</ifStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> decSize </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
 <ifStatement>
 <keyword> if </keyword>
 <symbol> ( </symbol>
 <expression>
 <term>
+<symbol> ( </symbol>
+<expression>
+<term>
 <identifier> 
-<name> size </name> 
+<name> x </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
 </identifier>
+</term>
+<symbol> + </symbol>
+<term>
+<identifier> 
+<name> width </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+</term>
+</expression>
+<symbol> ) </symbol>
 </term>
 <symbol> &gt; </symbol>
 <term>
-<integerConstant> 2 </integerConstant>
+<integerConstant> 511 </integerConstant>
 </term>
 </expression>
 <symbol> ) </symbol>
 <symbol> { </symbol>
 <statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> erase </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
 <letStatement>
 <keyword> let </keyword>
 <identifier> 
-<name> size </name> 
+<name> x </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -700,81 +1142,23 @@
 <symbol> = </symbol>
 <expression>
 <term>
+<integerConstant> 511 </integerConstant>
+</term>
+<symbol> - </symbol>
+<term>
 <identifier> 
-<name> size </name> 
+<name> width </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
 </identifier>
-</term>
-<symbol> - </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
 </term>
 </expression>
 <symbol> ; </symbol>
 </letStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> draw </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
 </statements>
 <symbol> } </symbol>
 </ifStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> moveUp </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
-<ifStatement>
-<keyword> if </keyword>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> &gt; </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-<symbol> { </symbol>
-<statements>
 <doStatement>
 <keyword> do </keyword>
 <identifier> 
@@ -827,157 +1211,9 @@
 <usage> use </usage> 
 </identifier>
 </term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
 <symbol> - </symbol>
 <term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<letStatement>
-<keyword> let </keyword>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> = </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> - </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</expression>
-<symbol> ; </symbol>
-</letStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> true </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
+<integerConstant> 4 </integerConstant>
 </term>
 </expression>
 <symbol> , </symbol>
@@ -1000,466 +1236,6 @@
 <index> 0 </index> 
 <usage> use </usage> 
 </identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-</statements>
-<symbol> } </symbol>
-</ifStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> moveDown </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
-<ifStatement>
-<keyword> if </keyword>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> &lt; </symbol>
-<term>
-<integerConstant> 254 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-<symbol> { </symbol>
-<statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> false </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<letStatement>
-<keyword> let </keyword>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> = </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</expression>
-<symbol> ; </symbol>
-</letStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> true </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> - </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-</statements>
-<symbol> } </symbol>
-</ifStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> moveLeft </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
-<ifStatement>
-<keyword> if </keyword>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> &gt; </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-<symbol> { </symbol>
-<statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> false </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
 </term>
 <symbol> - </symbol>
 <term>
@@ -1476,41 +1252,10 @@
 <usage> use </usage> 
 </identifier>
 </term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
 <symbol> + </symbol>
 <term>
 <identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
+<name> height </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -1521,324 +1266,6 @@
 <symbol> ) </symbol>
 <symbol> ; </symbol>
 </doStatement>
-<letStatement>
-<keyword> let </keyword>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> = </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> - </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</expression>
-<symbol> ; </symbol>
-</letStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> true </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-</statements>
-<symbol> } </symbol>
-</ifStatement>
-<returnStatement>
-<keyword> return </keyword>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
-<symbol> } </symbol>
-</subroutineBody>
-</subroutineDec>
-<subroutineDec>
-<keyword> method </keyword>
-<keyword> void </keyword>
-<identifier> 
-<name> moveRight </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> ( </symbol>
-<parameterList>
-</parameterList>
-<symbol> ) </symbol>
-<subroutineBody>
-<symbol> { </symbol>
-<statements>
-<ifStatement>
-<keyword> if </keyword>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
-<symbol> &lt; </symbol>
-<term>
-<integerConstant> 510 </integerConstant>
-</term>
-</expression>
-<symbol> ) </symbol>
-<symbol> { </symbol>
-<statements>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> setColor </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<keyword> false </keyword>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<doStatement>
-<keyword> do </keyword>
-<identifier> 
-<name> Screen </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> . </symbol>
-<identifier> 
-<name> drawRectangle </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-<symbol> ( </symbol>
-<expressionList>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 1 </integerConstant>
-</term>
-</expression>
-<symbol> , </symbol>
-<expression>
-<term>
-<identifier> 
-<name> y </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<identifier> 
-<name> size </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-</expression>
-</expressionList>
-<symbol> ) </symbol>
-<symbol> ; </symbol>
-</doStatement>
-<letStatement>
-<keyword> let </keyword>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> declaration </usage> 
-</identifier>
-<symbol> = </symbol>
-<expression>
-<term>
-<identifier> 
-<name> x </name> 
-<category> subroutine </category> 
-<index> 0 </index> 
-<usage> use </usage> 
-</identifier>
-</term>
-<symbol> + </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</expression>
-<symbol> ; </symbol>
-</letStatement>
 <doStatement>
 <keyword> do </keyword>
 <identifier> 
@@ -1897,7 +1324,7 @@
 <symbol> + </symbol>
 <term>
 <identifier> 
-<name> size </name> 
+<name> width </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -1908,7 +1335,7 @@
 </term>
 <symbol> - </symbol>
 <term>
-<integerConstant> 1 </integerConstant>
+<integerConstant> 3 </integerConstant>
 </term>
 </expression>
 <symbol> , </symbol>
@@ -1935,7 +1362,7 @@
 <symbol> + </symbol>
 <term>
 <identifier> 
-<name> size </name> 
+<name> width </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
@@ -1955,7 +1382,7 @@
 <symbol> + </symbol>
 <term>
 <identifier> 
-<name> size </name> 
+<name> height </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 

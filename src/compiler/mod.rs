@@ -1,13 +1,24 @@
+use crate::compiler::symbol_table::{
+    Identifier, SymbolTable, Variable, VariableKind, VariableScope, VariableType,
+};
 use crate::tokenizer::*;
 use anyhow::{bail, Result};
 use std::fs::File;
 use std::io::Write;
 use std::iter::Peekable;
 
+mod symbol_table;
+
 pub struct Compiler<'a> {
     tokenizer: &'a mut Peekable<Tokenizer<'a>>,
     output: &'a mut File,
     current_token: Option<Token>,
+    current_identifier_name: Option<String>,
+    current_identifier_category: Option<String>,
+    current_identifier_index: usize,
+    current_identifier_usage: Option<String>,
+    class_symbol_table: SymbolTable,
+    subroutine_symbol_table: SymbolTable,
 }
 
 impl<'a> Compiler<'a> {
@@ -16,6 +27,12 @@ impl<'a> Compiler<'a> {
             tokenizer,
             output,
             current_token: None,
+            current_identifier_name: None,
+            current_identifier_category: None,
+            current_identifier_index: 0,
+            current_identifier_usage: None,
+            class_symbol_table: Vec::new(),
+            subroutine_symbol_table: Vec::new(),
         }
     }
 
@@ -173,7 +190,105 @@ impl<'a> Compiler<'a> {
     fn compile_identifier(&mut self) -> Result<()> {
         match &self.current_token {
             Some(Token::Identifier(IdentifierValue { value })) => {
-                write!(self.output, "<identifier> {} </identifier>\n", value)?;
+                //match (
+                //    self.current_identifier_name.clone(),
+                //    self.current_identifier_category.clone(),
+                //    self.current_identifier_usage.clone(),
+                //) {
+                //    (Some(identifier_name), Some(identifier_category), Some(identifier_usage)) => {}
+                //    _ => {}
+                //}
+
+                self.current_identifier_name = Some(value.to_string());
+
+                if self.current_identifier_category == Some("static".to_string()) {
+                    self.current_identifier_index = self
+                        .class_symbol_table
+                        .iter()
+                        .filter(|element| match element.variable_kind {
+                            VariableKind::Static => true,
+                            _ => false,
+                        })
+                        .count();
+
+                    let value = Variable {
+                        variable_name: self.current_identifier_name.clone().unwrap(),
+                        variable_kind: VariableKind::Static,
+                        variable_type: VariableType::Integer,
+                        variable_scope: VariableScope::ClassLevel,
+                        variable_index: self.current_identifier_index,
+                    };
+
+                    self.class_symbol_table.push(value);
+                } else if self.current_identifier_category == Some("field".to_string()) {
+                    self.current_identifier_index = self
+                        .class_symbol_table
+                        .iter()
+                        .filter(|element| match element.variable_kind {
+                            VariableKind::Field => true,
+                            _ => false,
+                        })
+                        .count();
+
+                    let value = Variable {
+                        variable_name: self.current_identifier_name.clone().unwrap(),
+                        variable_kind: VariableKind::Field,
+                        variable_type: VariableType::Integer,
+                        variable_scope: VariableScope::ClassLevel,
+                        variable_index: self.current_identifier_index,
+                    };
+
+                    self.class_symbol_table.push(value);
+                } else if self.current_identifier_category == Some("local".to_string()) {
+                    self.current_identifier_index = self
+                        .class_symbol_table
+                        .iter()
+                        .filter(|element| match element.variable_kind {
+                            VariableKind::Variable => true,
+                            _ => false,
+                        })
+                        .count();
+
+                    let value = Variable {
+                        variable_name: self.current_identifier_name.clone().unwrap(),
+                        variable_kind: VariableKind::Variable,
+                        variable_type: VariableType::Integer,
+                        variable_scope: VariableScope::SubroutineLevel,
+                        variable_index: self.current_identifier_index,
+                    };
+
+                    self.class_symbol_table.push(value);
+                } else if self.current_identifier_category == Some("argument".to_string()) {
+                    self.current_identifier_index = self
+                        .class_symbol_table
+                        .iter()
+                        .filter(|element| match element.variable_kind {
+                            VariableKind::Argument => true,
+                            _ => false,
+                        })
+                        .count();
+
+                    let value = Variable {
+                        variable_name: self.current_identifier_name.clone().unwrap(),
+                        variable_kind: VariableKind::Argument,
+                        variable_type: VariableType::Integer,
+                        variable_scope: VariableScope::SubroutineLevel,
+                        variable_index: self.current_identifier_index,
+                    };
+
+                    self.class_symbol_table.push(value);
+                }
+
+                write!(
+                        self.output,
+                        "<identifier> \n<name> {} </name> \n<category> {} </category> \n<index> {} </index> \n<usage> {} </usage> \n</identifier>\n",
+                        self.current_identifier_name.as_ref().unwrap_or(&"".to_string()),
+                        self.current_identifier_category.as_ref().unwrap_or(&"".to_string()),
+                        self.current_identifier_index,
+                        self.current_identifier_usage.as_ref().unwrap_or(&"".to_string()),
+                    )?;
+
+                self.current_identifier_index = 0;
             }
             _ => bail!(
                 "Expected to find identifier. But found this instead: {:?}.",
@@ -186,10 +301,12 @@ impl<'a> Compiler<'a> {
     }
 
     // Pogram structure
-   
-    // Action: Create class level symbol table and subroutine level symbol table.
     fn compile_class(&mut self) -> Result<()> {
+        self.current_identifier_category = Some("class".to_string());
+        self.current_identifier_usage = Some("declaration".to_string());
+
         write!(self.output, "<class>\n")?;
+
         self.compile_keyword(Keyword::Class)?;
         self.compile_identifier()?;
         self.compile_symbol(Symbol::LeftCurlyBracket)?;
@@ -208,6 +325,10 @@ impl<'a> Compiler<'a> {
         }
 
         self.compile_symbol(Symbol::RightCurlyBracket)?;
+
+        self.current_identifier_category = None;
+        self.current_identifier_usage = None;
+
         write!(self.output, "</class>\n")?;
 
         Ok(())
@@ -216,9 +337,19 @@ impl<'a> Compiler<'a> {
     fn compile_classvardec(&mut self) -> Result<()> {
         write!(self.output, "<classVarDec>\n")?;
 
+        self.current_identifier_category = Some("class".to_string());
+        self.current_identifier_usage = Some("declaration".to_string());
+
         match self.current_token {
-            Some(Token::Keyword(Keyword::Static)) => self.compile_keyword(Keyword::Static)?,
-            Some(Token::Keyword(Keyword::Field)) => self.compile_keyword(Keyword::Field)?,
+            // TODO:  Set current variable kind here
+            Some(Token::Keyword(Keyword::Static)) => {
+                self.current_identifier_category = Some("static".to_string());
+                self.compile_keyword(Keyword::Static)?;
+            }
+            Some(Token::Keyword(Keyword::Field)) => {
+                self.current_identifier_category = Some("field".to_string());
+                self.compile_keyword(Keyword::Field)?;
+            }
             _ => bail!(
                 "Expected to find keyword static or field. But found this instead: {:?}.",
                 self.current_token
@@ -228,17 +359,24 @@ impl<'a> Compiler<'a> {
         self.compile_type()?;
         self.compile_identifier()?;
 
+        // TODO: Create symbol talbe entry here. and clear current variable info.
+
         while self.current_token == Some(Token::Symbol(Symbol::Comma)) {
             self.compile_symbol(Symbol::Comma)?;
             self.compile_identifier()?;
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
+
+        self.current_identifier_category = None;
+        self.current_identifier_usage = None;
+
         write!(self.output, "</classVarDec>\n")?;
         Ok(())
     }
 
     fn compile_type(&mut self) -> Result<()> {
+        // TODO: set current variable type here
         match &self.current_token {
             Some(Token::Keyword(Keyword::Int)) => {
                 self.compile_keyword(Keyword::Int)?;
@@ -263,6 +401,9 @@ impl<'a> Compiler<'a> {
 
     // Action: Reset the subroutine level symbol table.
     fn compile_subroutinedec(&mut self) -> Result<()> {
+        self.current_identifier_category = Some("subroutine".to_string());
+        self.current_identifier_usage = Some("declaration".to_string());
+
         write!(self.output, "<subroutineDec>\n")?;
 
         match &self.current_token {
@@ -288,12 +429,17 @@ impl<'a> Compiler<'a> {
         self.compile_symbol(Symbol::RightRoundBracket)?;
         self.compile_subroutinebody()?;
 
+        self.current_identifier_category = None;
+        self.current_identifier_usage = None;
+
         write!(self.output, "</subroutineDec>\n")?;
         Ok(())
     }
 
     fn compile_parameterlist(&mut self) -> Result<()> {
         write!(self.output, "<parameterList>\n")?;
+
+        self.current_identifier_usage = Some("declaration".to_string());
 
         match self.compile_type() {
             Ok(_) => {
@@ -307,6 +453,8 @@ impl<'a> Compiler<'a> {
             }
             Err(_) => {}
         };
+
+        self.current_identifier_usage = None;
 
         write!(self.output, "</parameterList>\n")?;
         Ok(())
@@ -336,8 +484,13 @@ impl<'a> Compiler<'a> {
     }
 
     // Variable declaration. Action: add the appropriate entry in the symbol table.
+    // Context: name (an identifier), type (int, char, boolean, className), kind (field, local,
+    // static, argument) and scope (class-level, subroutine-level).
     fn compile_vardec(&mut self) -> Result<()> {
         write!(self.output, "<varDec>\n")?;
+
+        self.current_identifier_category = Some("local".to_string());
+        self.current_identifier_usage = Some("declaration".to_string());
 
         self.compile_keyword(Keyword::Var)?;
         self.compile_type()?;
@@ -349,6 +502,9 @@ impl<'a> Compiler<'a> {
         }
 
         self.compile_symbol(Symbol::Semicolon)?;
+
+        self.current_identifier_category = None;
+        self.current_identifier_usage = None;
 
         write!(self.output, "</varDec>\n")?;
         Ok(())
@@ -384,6 +540,8 @@ impl<'a> Compiler<'a> {
     fn compile_let_statement(&mut self) -> Result<()> {
         write!(self.output, "<letStatement>\n")?;
 
+        self.current_identifier_usage = Some("use".to_string());
+
         self.compile_keyword(Keyword::Let)?;
         self.compile_identifier()?;
 
@@ -396,6 +554,8 @@ impl<'a> Compiler<'a> {
         self.compile_symbol(Symbol::Equal)?;
         self.compile_expression()?;
         self.compile_symbol(Symbol::Semicolon)?;
+
+        self.current_identifier_usage = None;
 
         write!(self.output, "</letStatement>\n")?;
         Ok(())
@@ -509,6 +669,8 @@ impl<'a> Compiler<'a> {
     fn compile_term(&mut self) -> Result<()> {
         write!(self.output, "<term>\n")?;
 
+        self.current_identifier_usage = Some("use".to_string());
+
         match &self.current_token {
             Some(Token::IntegerConstant(_value)) => {
                 self.compile_integer_constant()?;
@@ -562,11 +724,15 @@ impl<'a> Compiler<'a> {
             ),
         }
 
+        self.current_identifier_usage = None;
+
         write!(self.output, "</term>\n")?;
         Ok(())
     }
 
     fn compile_subroutine_call(&mut self) -> Result<()> {
+        self.current_identifier_usage = Some("use".to_string());
+
         self.compile_identifier()?;
 
         if self.current_token == Some(Token::Symbol(Symbol::Dot)) {
@@ -577,6 +743,8 @@ impl<'a> Compiler<'a> {
         self.compile_symbol(Symbol::LeftRoundBracket)?;
         self.compile_expression_list()?;
         self.compile_symbol(Symbol::RightRoundBracket)?;
+
+        self.current_identifier_usage = None;
 
         Ok(())
     }

@@ -25,7 +25,7 @@
 <varDec>
 <keyword> var </keyword>
 <identifier> 
-<name> SquareGame </name> 
+<name> PongGame </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> declaration </usage> 
@@ -39,6 +39,27 @@
 <symbol> ; </symbol>
 </varDec>
 <statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> 
+<name> PongGame </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> . </symbol>
+<identifier> 
+<name> newInstance </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
 <letStatement>
 <keyword> let </keyword>
 <identifier> 
@@ -51,14 +72,14 @@
 <expression>
 <term>
 <identifier> 
-<name> SquareGame </name> 
+<name> PongGame </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 
 </identifier>
 <symbol> . </symbol>
 <identifier> 
-<name> new </name> 
+<name> getInstance </name> 
 <category> subroutine </category> 
 <index> 0 </index> 
 <usage> use </usage> 

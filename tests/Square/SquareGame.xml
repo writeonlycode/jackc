@@ -1,23 +1,53 @@
 <class>
 <keyword> class </keyword>
-<identifier> SquareGame </identifier>
+<identifier> 
+<name> SquareGame </name> 
+<category> class </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> { </symbol>
 <classVarDec>
 <keyword> field </keyword>
-<identifier> Square </identifier>
-<identifier> square </identifier>
+<identifier> 
+<name> Square </name> 
+<category> field </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<identifier> 
+<name> square </name> 
+<category> field </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ; </symbol>
 </classVarDec>
 <classVarDec>
 <keyword> field </keyword>
 <keyword> int </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> field </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ; </symbol>
 </classVarDec>
 <subroutineDec>
 <keyword> constructor </keyword>
-<identifier> SquareGame </identifier>
-<identifier> new </identifier>
+<identifier> 
+<name> SquareGame </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
+<identifier> 
+<name> new </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ( </symbol>
 <parameterList>
 </parameterList>
@@ -27,13 +57,28 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> Square </identifier>
+<identifier> 
+<name> Square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> new </identifier>
+<identifier> 
+<name> new </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 <expression>
@@ -61,7 +106,12 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -86,7 +136,12 @@
 <subroutineDec>
 <keyword> method </keyword>
 <keyword> void </keyword>
-<identifier> dispose </identifier>
+<identifier> 
+<name> dispose </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ( </symbol>
 <parameterList>
 </parameterList>
@@ -96,9 +151,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> dispose </identifier>
+<identifier> 
+<name> dispose </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -107,9 +172,19 @@
 </doStatement>
 <doStatement>
 <keyword> do </keyword>
-<identifier> Memory </identifier>
+<identifier> 
+<name> Memory </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> deAlloc </identifier>
+<identifier> 
+<name> deAlloc </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 <expression>
@@ -132,7 +207,12 @@
 <subroutineDec>
 <keyword> method </keyword>
 <keyword> void </keyword>
-<identifier> moveSquare </identifier>
+<identifier> 
+<name> moveSquare </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ( </symbol>
 <parameterList>
 </parameterList>
@@ -145,7 +225,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -157,9 +242,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> moveUp </identifier>
+<identifier> 
+<name> moveUp </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -174,7 +269,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -186,9 +286,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> moveDown </identifier>
+<identifier> 
+<name> moveDown </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -203,7 +313,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -215,9 +330,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> moveLeft </identifier>
+<identifier> 
+<name> moveLeft </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -232,7 +357,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -244,9 +374,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> moveRight </identifier>
+<identifier> 
+<name> moveRight </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -258,9 +398,19 @@
 </ifStatement>
 <doStatement>
 <keyword> do </keyword>
-<identifier> Sys </identifier>
+<identifier> 
+<name> Sys </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> wait </identifier>
+<identifier> 
+<name> wait </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 <expression>
@@ -283,7 +433,12 @@
 <subroutineDec>
 <keyword> method </keyword>
 <keyword> void </keyword>
-<identifier> run </identifier>
+<identifier> 
+<name> run </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ( </symbol>
 <parameterList>
 </parameterList>
@@ -293,19 +448,34 @@
 <varDec>
 <keyword> var </keyword>
 <keyword> char </keyword>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ; </symbol>
 </varDec>
 <varDec>
 <keyword> var </keyword>
 <keyword> boolean </keyword>
-<identifier> exit </identifier>
+<identifier> 
+<name> exit </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> ; </symbol>
 </varDec>
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> exit </identifier>
+<identifier> 
+<name> exit </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -321,7 +491,12 @@
 <term>
 <symbol> ~ </symbol>
 <term>
-<identifier> exit </identifier>
+<identifier> 
+<name> exit </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 </term>
 </expression>
@@ -333,7 +508,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -345,13 +525,28 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> Keyboard </identifier>
+<identifier> 
+<name> Keyboard </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> keyPressed </identifier>
+<identifier> 
+<name> keyPressed </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -362,7 +557,12 @@
 </letStatement>
 <doStatement>
 <keyword> do </keyword>
-<identifier> moveSquare </identifier>
+<identifier> 
+<name> moveSquare </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -377,7 +577,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -389,7 +594,12 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> exit </identifier>
+<identifier> 
+<name> exit </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -406,7 +616,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -418,9 +633,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> decSize </identifier>
+<identifier> 
+<name> decSize </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -435,7 +660,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -447,9 +677,19 @@
 <statements>
 <doStatement>
 <keyword> do </keyword>
-<identifier> square </identifier>
+<identifier> 
+<name> square </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> incSize </identifier>
+<identifier> 
+<name> incSize </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -464,7 +704,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -476,7 +721,12 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -493,7 +743,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -505,7 +760,12 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -522,7 +782,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -534,7 +799,12 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -551,7 +821,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -563,7 +838,12 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> direction </identifier>
+<identifier> 
+<name> direction </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -585,7 +865,12 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 </term>
 <symbol> = </symbol>
 <term>
@@ -601,13 +886,28 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> key </identifier>
+<identifier> 
+<name> key </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> declaration </usage> 
+</identifier>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> Keyboard </identifier>
+<identifier> 
+<name> Keyboard </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> . </symbol>
-<identifier> keyPressed </identifier>
+<identifier> 
+<name> keyPressed </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>
@@ -618,7 +918,12 @@
 </letStatement>
 <doStatement>
 <keyword> do </keyword>
-<identifier> moveSquare </identifier>
+<identifier> 
+<name> moveSquare </name> 
+<category> subroutine </category> 
+<index> 0 </index> 
+<usage> use </usage> 
+</identifier>
 <symbol> ( </symbol>
 <expressionList>
 </expressionList>

@@ -189,8 +189,15 @@ impl<'a> Iterator for Tokenizer<'a> {
                     return Some(Token::Keyword(Keyword::Let));
                 }
                 "do" => {
-                    buffer.clear();
-                    return Some(Token::Keyword(Keyword::Do));
+                    let peek = match chars.peek() {
+                        Some(Ok(value)) => value,
+                        _ => &'\n',
+                    };
+
+                    if peek == &' ' {
+                        buffer.clear();
+                        return Some(Token::Keyword(Keyword::Do));
+                    }
                 }
                 "if" => {
                     buffer.clear();
